@@ -10,3 +10,6 @@ y = pd.DataFrame(y, columns=["Y"])
 
 df = pd.concat([X, y], axis=1)
 display(df)
+
+
+# python 2-make-classifictin.py
