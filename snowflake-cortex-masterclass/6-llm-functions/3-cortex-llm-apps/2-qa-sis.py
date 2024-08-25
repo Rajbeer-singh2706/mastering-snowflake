@@ -17,3 +17,10 @@ if prompt := st.text_input(
     query = f"select snowflake.cortex.complete('mistral-large', '{prompt}')"
     response = get_active_session().sql(query).collect()[0][0]
     st.write(response)
+
+
+
+# runt this in snowflake 
+# Select streamlist application , create streamlist application
+# 
+

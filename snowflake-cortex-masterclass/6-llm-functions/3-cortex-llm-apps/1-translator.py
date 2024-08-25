@@ -10,3 +10,6 @@ if prompt := st.text_area(" ", value="How are you doing?", height=300):
     query = f"SELECT snowflake.cortex.translate('{prompt}', 'en', 'fr')"
     response = session.sql(query).collect()[0][0]
     st.write(response)
+
+
+# streamlit run 1-translator.py

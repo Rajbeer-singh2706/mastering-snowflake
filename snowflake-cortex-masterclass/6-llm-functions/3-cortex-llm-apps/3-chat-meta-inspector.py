@@ -40,3 +40,10 @@ if not first and st.session_state.messages[-1]["role"] != "assistant":
             st.dataframe(session.sql(query).to_pandas(), use_container_width=True)
         else:
             st.error("No query!")
+
+
+
+# streamlit run 3-chat-meta-inspector.py
+# Question : Gernate SQL QUery to return all schema names 
+# Generate SQL query to return the first schema name 
+
