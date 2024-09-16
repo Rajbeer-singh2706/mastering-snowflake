@@ -4,7 +4,7 @@ use schema snowpark.public;
 
 -- Python stored procedure
 -- https://docs.snowflake.com/en/developer-guide/stored-procedure/stored-procedures-python
-create or replace procedure procPythonS(num float)
+create or replace PROCEDURE procPythonS(num float)
   returns string
   language python
   runtime_version = '3.8'
@@ -16,12 +16,11 @@ def proc1(session: snowpark.Session, num: float):
   query = f"select '+' || to_char({num})"
   return session.sql(query).collect()[0][0]
 $$;
-
 call procPythonS(22.5);
 
--- Python UDF
+-- Python UDF(FUNCTION) 
 -- https://cristian-70480.medium.com/how-to-generate-snowflake-stored-procs-via-python-worksheets-01d49b5b3cb2
-create or replace function fctPythonS(num float)
+create or replace FUNCTION fctPythonS(num float)
   returns string
   language python
   runtime_version = '3.8'
@@ -32,7 +31,6 @@ as $$
 def proc1(num: float):
   return '+' + str(num)
 $$;
-
 select fctPythonS(22.5);
 
 -- Python UDTF

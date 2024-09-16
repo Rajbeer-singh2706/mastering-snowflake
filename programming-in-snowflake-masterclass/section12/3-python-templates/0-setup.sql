@@ -1,6 +1,7 @@
 create database snowpark_python;
 create stage mystage;
 
+-- in your local
 -- could need to reinstall Snowpark (last version was 1.10.0):
 -- pip uninstall snowflake-snowpark-python
 -- pip install snowflake-snowpark-python==1.9.0
