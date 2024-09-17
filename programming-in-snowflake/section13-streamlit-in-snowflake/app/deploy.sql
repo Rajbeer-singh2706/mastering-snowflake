@@ -56,3 +56,6 @@ CREATE STREAMLIT hierarchical_data_viewer
     MAIN_FILE = '/app.py'
     QUERY_WAREHOUSE = "COMPUTE_WH";
 SHOW STREAMLITS;
+
+
+-- snowsql -c demo_conn -f deploy.sql

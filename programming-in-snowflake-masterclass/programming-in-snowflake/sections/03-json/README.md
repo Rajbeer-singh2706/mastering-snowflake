@@ -1,3 +1,0 @@
-# Section: Loading and Processing JSON Data
-
-...
