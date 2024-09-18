@@ -11,7 +11,13 @@ use schema employees.public;
     ]
 }*/
 
+-- test all
+select *
+  from deptt,
+  lateral flatten(input => deptt.v, path => 'data') d;
+
 -- flatten JSON into tabular data format
+-- fields name are case sensitive
 create table dept as
 select d.value:DEPTNO::number(2,0) as deptno,
     d.value:DNAME::varchar(20) as dname,

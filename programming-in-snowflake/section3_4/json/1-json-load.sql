@@ -5,6 +5,7 @@ use schema employees.public;
 create or replace file format myjsonformat
   TYPE = json;
 
+-- upload dept.json to mystage manually
 SELECT *
 FROM TABLE(INFER_SCHEMA(
   LOCATION => '@mystage',
