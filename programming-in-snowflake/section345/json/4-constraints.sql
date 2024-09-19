@@ -5,6 +5,9 @@ use schema employees.public;
 alter table dept
   add primary key (deptno);
 
+SHOW PRIMARY KEYS IN TABLE DEPT;
+alter table dept drop constraint "SYS_CONSTRAINT_d480fbe3-8ee7-42c5-9982-1aa8cccf97f7";
+
 select GET_DDL('TABLE', 'DEPT');
 create TABLE dept (
 	DEPTNO NUMBER(2,0),
@@ -16,6 +19,9 @@ create TABLE dept (
 -- add FK constraint to EMP table
 alter table emp
   add foreign key (deptno) references dept (deptno);
+
+alter table emp 
+   drop constraint dept_pk 
 
 -- get_ddl()
 select GET_DDL('TABLE', 'EMP');

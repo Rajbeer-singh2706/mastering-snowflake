@@ -22,6 +22,8 @@ order by department;
 -- (try to) create materialized view
 -- (not working with multiple tables!)
 -- create view salaries_per_department
+--Invalid materialized view definition. More than one table referenced in the view definition
+
 create materialized view salaries_per_department as
 select 
     d.dname as department, 
@@ -57,3 +59,4 @@ group by department;
 
 -- CHECK IT 
 select * from salaries_per_department order by department;
+select * from salaries_per_department order by department DESC;

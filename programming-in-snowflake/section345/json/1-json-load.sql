@@ -12,6 +12,8 @@ FROM TABLE(INFER_SCHEMA(
   FILES => 'dept.json',
   FILE_FORMAT => 'myjsonformat'));
 
+-- data: array
+
 -- load JSON data into VARIANT
 create temporary table deptt(v variant);
 

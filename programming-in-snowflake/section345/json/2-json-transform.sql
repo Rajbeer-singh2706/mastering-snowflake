@@ -18,7 +18,7 @@ select *
 
 -- flatten JSON into tabular data format
 -- fields name are case sensitive
-create table dept as
+create OR REPLACE table dept as
 select d.value:DEPTNO::number(2,0) as deptno,
     d.value:DNAME::varchar(20) as dname,
     d.value:LOC::varchar(20) as loc

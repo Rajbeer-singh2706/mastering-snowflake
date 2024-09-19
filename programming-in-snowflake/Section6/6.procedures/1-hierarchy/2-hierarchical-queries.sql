@@ -12,8 +12,10 @@ with cte as (
   from employee_manager e
     left join employee_manager m1 on e.manager = m1.employee
     left join employee_manager m2 on m1.manager = m2.employee
-    left join employee_manager m3 on m2.manager = m3.employee)
-select regexp_count(path, '\\.') as level,
+    left join employee_manager m3 on m2.manager = m3.employee
+)
+select 
+  regexp_count(path, '\\.') as level,
   repeat('  ', level) || name as name,
   path
 from cte
