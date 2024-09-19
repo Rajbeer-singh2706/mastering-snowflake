@@ -5,7 +5,10 @@ create stage mystage;
 -- cannot run this from the web UI, upload manually (file in GitHub)
 -- put file://C:\data\emp.csv @mystage;
 
+list @mystage;
+
 -- inspect uploaded file directly
+SELECT METADATA$FILE_ROW_NUMBER as RowId,$1, $2, $3, $4, $5 FROM @mystage;
 SELECT METADATA$FILE_ROW_NUMBER as RowId,
   $1, $2, $3, $4, $5
 FROM @mystage/emp.csv;
@@ -18,6 +21,7 @@ create or replace file format mycsvformat
 -- (1) show inferred columns
 -- (2) use them to create table DDL
 -- (3) use them to create table directly
+-- dont put in double quotes it give error 
 -- see https://docs.snowflake.com/en/sql-reference/functions/infer_schema
 SELECT *
 FROM TABLE(INFER_SCHEMA(
@@ -25,8 +29,11 @@ FROM TABLE(INFER_SCHEMA(
   FILES => 'emp.csv',
   FILE_FORMAT => 'mycsvformat'));
 
-SELECT GENERATE_COLUMN_DESCRIPTION(
-  ARRAY_AGG(OBJECT_CONSTRUCT(*)), 'table') AS COLUMNS
+SELECT 
+GENERATE_COLUMN_DESCRIPTION(
+  ARRAY_AGG(OBJECT_CONSTRUCT(*)), 
+  'table'
+) AS COLUMNS
 FROM TABLE(INFER_SCHEMA(
   LOCATION => '@mystage',
   FILES => 'emp.csv',
@@ -42,6 +49,7 @@ FROM TABLE(INFER_SCHEMA(
 "COMM" NUMBER(5, 1),
 "DEPTNO" NUMBER(2, 0)
 */
+
         
 CREATE OR REPLACE TABLE emp USING TEMPLATE (
   SELECT ARRAY_AGG(OBJECT_CONSTRUCT(*))
@@ -49,4 +57,5 @@ CREATE OR REPLACE TABLE emp USING TEMPLATE (
     LOCATION => '@mystage',
     FILES => 'emp.csv',
     FILE_FORMAT => 'mycsvformat')));
-select * from emp;
+
+select * from emp; -- only schema no data 

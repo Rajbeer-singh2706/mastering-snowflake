@@ -2,6 +2,18 @@
 use schema employees.public;
 
 select GET_DDL('TABLE', 'EMP');
+
+create or replace TABLE EMP (
+	EMPNO NUMBER(4,0),
+	ENAME VARCHAR(16777216),
+	JOB VARCHAR(16777216),
+	MGR NUMBER(4,0),
+	HIREDATE DATE,
+	SAL NUMBER(5,1),
+	COMM NUMBER(5,1),
+	DEPTNO NUMBER(2,0)
+);
+
 create or replace TABLE EMP (
 	EMPNO NUMBER(4,0) PRIMARY KEY,
 	ENAME VARCHAR(20) NOT NULL UNIQUE,
@@ -12,6 +24,8 @@ create or replace TABLE EMP (
 	COMM float,
 	DEPTNO NUMBER(2,0) NOT NULL
 );
+
+-- BULK COPY : COPY COMMAND 
 
 COPY INTO EMP FROM @mystage
    FILES = ('emp.csv')
