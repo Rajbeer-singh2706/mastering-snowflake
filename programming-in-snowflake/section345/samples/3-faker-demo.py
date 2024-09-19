@@ -14,3 +14,7 @@ output = [{
     } for _ in range(1000)]
 df = pd.DataFrame(output)
 print(df)
+
+
+# pip3 install faker
+# python3 3-faker-demo.py

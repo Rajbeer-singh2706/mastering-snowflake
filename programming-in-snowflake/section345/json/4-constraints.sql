@@ -17,6 +17,7 @@ create TABLE dept (
 alter table emp
   add foreign key (deptno) references dept (deptno);
 
+-- get_ddl()
 select GET_DDL('TABLE', 'EMP');
 create table EMP (
 	EMPNO NUMBER(4,0) NOT NULL,

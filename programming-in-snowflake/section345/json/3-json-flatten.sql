@@ -21,6 +21,9 @@ use schema tests.public;
 */
 
 -- insert inline JSON --> VARIANT
+--parse_json()
+-- table()
+-- $$ : becoz of multiline string
 create or replace table json(name string, v variant) as
   select 'John', parse_json($${
     "managers": [

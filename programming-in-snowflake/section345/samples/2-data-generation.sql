@@ -5,3 +5,6 @@ select
   randstr(10, uniform(1, 100000, random(3)))::varchar(10) as license_plate,
   randstr(uniform(10, 30, random(4)), uniform(1, 200000, random(4)))::varchar(30) as email
 from table(generator(rowcount => 1000000));
+
+-- randstr => random string
+-- uniform() => uniform distribution
