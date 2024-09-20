@@ -1,3 +1,0 @@
-# Section: Snowflake Data Pipelines
-
-...

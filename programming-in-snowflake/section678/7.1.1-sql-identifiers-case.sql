@@ -12,3 +12,6 @@ select V from aBC;
 select "v" from "Abc";
 drop table ABC;
 drop table "Abc";
+
+
+show tables like 'abc%'
