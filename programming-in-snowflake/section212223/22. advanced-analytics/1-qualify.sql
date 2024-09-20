@@ -1,8 +1,10 @@
 use schema employees.public;
 
 -- top earners (with max salaries) per dept: KING, FORD, BLAKE
-select ename, dname, sal
-from emp join dept on emp.deptno = dept.deptno
+select 
+   ename, dname, sal
+from emp join dept 
+   on emp.deptno = dept.deptno
 order by dname, sal desc, ename;
 
 -- with WHERE (--> error!)

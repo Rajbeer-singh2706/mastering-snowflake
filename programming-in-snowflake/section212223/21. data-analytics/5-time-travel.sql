@@ -1,12 +1,16 @@
 create or replace database time_travel;
 create or replace table persons (id int, name string, ts timestamp);
 
+-- Time travel=>  0 - disble , 1 - ...90 days 
+
+
+
 -- =============================================================
 -- time travel settings
-show parameters like 'data_retention_time_in_days' in account;
-show parameters like 'data_retention_time_in_days' in database;
-show parameters like 'data_retention_time_in_days' in schema;
-show parameters like 'data_retention_time_in_days' for table persons;
+show parameters like 'data_retention_time_in_days' in account;          --1 days (default)
+show parameters like 'data_retention_time_in_days' in database;         -- 1 days(default)
+show parameters like 'data_retention_time_in_days' in schema;           -- 1 days(default)
+show parameters like 'data_retention_time_in_days' for table persons;   -- 1 days(default)
 
 alter table persons set data_retention_time_in_days = 3;
 
@@ -31,13 +35,15 @@ select * from persons before (timestamp => $ts);
 -- negative, relative, in seconds
 select * from persons at (offset => -60);
 
+select * from persons at (offset => -1000); --error 
 -- =============================================================
 -- data recovery with time travel
 drop table persons;
 undrop table persons;
 
-truncate persons;
-create table persons2 clone persons before (statement => last_query_id());
+-- case2
+truncate persons; -- truncate all data first 
+create table persons2 clone persons before (statement => last_query_id()); -- create new table 
 select * from persons2;
 
 drop table persons;
