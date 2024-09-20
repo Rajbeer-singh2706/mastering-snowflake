@@ -1,12 +1,17 @@
 use schema employees.public;
 
 -- skew & kurtosis
-select count(*), avg(sal), median(sal),
-  skew(sal), kurtosis(sal)
+select 
+  count(*), 
+  avg(sal), 
+  median(sal),
+  skew(sal), 
+  kurtosis(sal) -- how high & how low is distrubtino
 from emp;
 
 -- linear regression
-select REGR_SLOPE(sals, year), 
+select 
+  REGR_SLOPE(sals, year), 
   REGR_INTERCEPT(sals, year),
   REGR_R2(sals, year)
 from (
