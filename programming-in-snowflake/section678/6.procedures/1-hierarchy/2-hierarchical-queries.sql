@@ -54,7 +54,8 @@ with recursive cte (level, name, path, employee) as (
     repeat('  ', level) || e.employee,
     path || '.' || e.employee,
     e.employee
-    from employee_manager e join cte m on e.manager = m.employee)
+    from employee_manager e join cte m on e.manager = m.employee
+)
 select name, path
 from cte
 order by path;
@@ -70,8 +71,10 @@ create recursive view employee_hierarchy (level, name, path, employee) as (
     repeat('  ', level) || e.employee,
     path || '.' || e.employee,
     e.employee
-    from employee_manager e join employee_hierarchy m on e.manager = m.employee);
+    from employee_manager e join employee_hierarchy m on e.manager = m.employee
+);
 
-select name, path
+select 
+  name, path
 from employee_hierarchy
 order by path;

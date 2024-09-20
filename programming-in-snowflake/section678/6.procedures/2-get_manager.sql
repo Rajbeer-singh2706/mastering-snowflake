@@ -1,8 +1,8 @@
 -- select context
 use schema employees.public;
 
--- SQL (Scripting) user-defined function (UDF)
-create or replace function get_manager(name string)
+-- SQL (Scripting) user-defined function (UDF) --- return scalar value
+CREATE or REPLACE function get_manager(name string)
   returns string
 as $$
   select manager
@@ -14,7 +14,7 @@ $$;
 select get_manager('BLAKE');
 select get_manager('nobody');
 
--- SQL (Scripting) user-defined table function (UDTF)
+-- SQL (Scripting) user-defined table function (UDTF) -- return TableType
 create or replace function get_subordinates(name string)
   returns table(employee string)
 as 'select employee from employee_manager where manager = name';
@@ -36,3 +36,12 @@ $$;
 call find_manager('BLAKE');
 call find_manager('nobody');
 -- select * from table(result_scan(last_query_id()));
+
+
+-- $$ => for BLOCK or Multiple statements 
+
+
+if(res.next())
+  return res.getColumnValue(1);
+else
+  return null; 
