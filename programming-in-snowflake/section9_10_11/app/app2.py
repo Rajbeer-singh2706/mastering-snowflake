@@ -11,6 +11,7 @@ st.set_page_config(layout="wide")
 st.title("Hierarchical Data Viewer")
 st.caption("Display your hierarchical data with charts and graphs.")
 
+# st.tabs()
 tabSource, tabFormat, tabGraph, tabChart, tabAnim = st.tabs(
     ["Source", "Format", "Graph", "Chart", "Animated"])
 
@@ -58,14 +59,19 @@ with tabChart:
         fig = charts.makeSunburst(labels, parents)
     else:
         fig = charts.makeSankey(labels, parents)
+
+    ## Display with Plotyly Chart     
     st.plotly_chart(fig, use_container_width=True)
 
 # show as D3 animated chart
 with tabAnim:
     sel = st.selectbox(
         "Select a D3 chart type:",
-        options=["Collapsible Tree", "Linear Dendrogram",
-            "Radial Dendrogram", "Network Graph"])
+        options=["Collapsible Tree", 
+                 "Linear Dendrogram",
+                "Radial Dendrogram", 
+                "Network Graph"]
+    )
     if sel == "Collapsible Tree":
         filename = animated.makeCollapsibleTree(df)
     elif sel == "Linear Dendrogram":
