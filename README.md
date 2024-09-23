@@ -10,4 +10,4 @@ deactivate
 pip3 install -r /Users/rajsingh/work/repos-new/mastering-snowflake/programming-in-snowflake/section9_10_11/app/requirements.txt
 
 
-streamlit==1.31.1
+## streamlit==1.31.1

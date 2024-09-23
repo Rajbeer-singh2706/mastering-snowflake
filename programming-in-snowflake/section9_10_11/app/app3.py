@@ -20,7 +20,8 @@ def loadFile(filename):
 
 with st.sidebar:
     uploaded_file = st.file_uploader(
-        "Upload a CSV file", type=["csv"], accept_multiple_files=False)
+        "Upload a CSV file", type=["csv"], accept_multiple_files=False
+    )
     
     path = os.path.dirname(__file__)
     filename = utils.getFullPath("data/employee-manager.csv")
