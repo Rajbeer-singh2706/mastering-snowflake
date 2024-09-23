@@ -1,6 +1,9 @@
 -- select database and schema
 use schema employees.public;
 
+select * from employee_manager;
+call show_tree_simple('employee_manager')
+
 -- call after data/animals.csv uploaded in @mystage
 create or replace table animals (child varchar, parent varchar);
 copy into animals from @mystage

@@ -24,7 +24,7 @@ with recursive cte (level, name, path, child) as (
     repeat('  ', level) || e.$1,
     path || '.' || e.$1,
     e.$1
-  from employee_manager e join cte m on e.$2 = m.child)
+  from employee_manager e join cte m on e.$2 = m.child) --m.$1 -> but got error , so he changed to child
 select name, path
 from cte
 order by path;

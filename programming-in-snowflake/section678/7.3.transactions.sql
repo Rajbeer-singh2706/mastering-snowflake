@@ -1,9 +1,17 @@
 create or replace database transactions;
 create or replace table log(msg string not null);
 
--- ==============================================================
+-- ###### BLOCK 
+begin 
+ -- 
+ -- 
+end; 
+ --its a block not the transactin becoz begin doesnt end with semicolon 
+
+
+-- use case 1
 -- committed transaction (paste transaction ID)
-begin transaction;
+begin transaction; -- ends with semicolon
 show transactions;
 describe transaction 1701770368254000000; -- change this with yours
 insert into log values ('must see');
@@ -11,13 +19,13 @@ commit;
 select * from log;
 truncate log;
 
--- rollbacked transaction
+-- rollbacked transaction(transaction keyword is optional)
 begin transaction;
 insert into log values ('wrong');
 rollback;
 select * from log;
 
--- aborted transaction
+-- case 2 => aborted transaction
 begin transaction name t1;
 insert into log values ('aborted');
 show locks in account;
@@ -31,13 +39,14 @@ select current_transaction(), last_transaction();
 show parameters like 'TRANSACTION_ABORT_ON_ERROR';
 show parameters like 'TRANSACTION_DEFAULT_ISOLATION_LEVEL';
 
--- ==============================================================
+-- CASE 3
 -- not scoped transactions: second begin ignored --> show nothing
 begin transaction;
 insert into log values ('outer');
 begin transaction;
 insert into log values ('inner');
 rollback;
+--show transaction -- everything is rollbacked
 commit;
 select * from log;
 truncate log;

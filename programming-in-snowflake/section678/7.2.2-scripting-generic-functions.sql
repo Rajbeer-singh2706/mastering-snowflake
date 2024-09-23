@@ -10,18 +10,19 @@ declare
   c1 cursor for
     with recursive cte (level, name, path, child) as (
       select 1, $1, $1, $1
-      from identifier(?) where $2 is null
+      from identifier(?) where $2 is null   --identiifer()
       union all
       select m.level + 1, repeat('  ', level) || e.$1,
         path || '.' || e.$1, e.$1
       from identifier(?) e join cte m on e.$2 = m.child)
     select name, path from cte order by path;
 begin
-  open c1 using (:tableName, :tableName);
+  open c1 using (:tableName, :tableName); -- variable binding 
   return table(resultset_from_cursor(c1));
+--exceptions
 end;
 
-call show_tree('employee_manager');
+call show_tree('employee_manager');  -- pass employee_manager view
 
 -- generic tree display (as Snowflake Scripting SP, w/ RESULTSET)
 create or replace procedure show_tree_rs(tableName varchar)
@@ -37,7 +38,8 @@ declare
       select m.level + 1, repeat('  ', level) || e.$1,
         path || '.' || e.$1, e.$1
       from identifier(:tableName) e join cte m on e.$2 = m.child)
-    select name, path from cte order by path);
+    select name, path from cte order by path
+  );
 begin
   return table(rs);
 end;
