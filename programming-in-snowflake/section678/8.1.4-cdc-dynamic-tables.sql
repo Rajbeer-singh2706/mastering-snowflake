@@ -4,6 +4,11 @@ create or replace schema data_pipelines.dynamic_tables;
 -- source (table) --> target (dynamic table)
 CREATE TABLE source(id INT, name STRING);
 
+-- CREATE Target TABLE as a => DYNAMIC TABLE 
+-- Encapsulated the STREAMS & TASK functionality together
+-- NO Longer Merge is Required 
+-- We can do some transformation as well , on the fly
+-- AS of now its very simple select
 CREATE DYNAMIC TABLE target
   WAREHOUSE = compute_wh
   TARGET_LAG = '1 minute'

@@ -10,11 +10,12 @@ create or replace stage mystage_s3
 
 -- should be empty
 list @mystage_s3;
+-- remove @mystage_s3/emp11.csv
 
 create table emp_pipe like emp;
 
 -- PURGE not supported!
-create pipe mypipe
+create or replace pipe mypipe
   auto_ingest = true
 as
   copy into emp_pipe from @mystage_s3
@@ -28,7 +29,7 @@ show pipes;
 -- add an event notification in the S3 bucket, for spool/ directory
 -- for "All object create events", w/ SNS Queue as ARN previously copied
 
--- upload some CSV files in the folder
+-- upload some CSV files in the folder ( one by one emp1.csv then emp2,csv)
 select system$pipe_status('mypipe');
 /*
 {
