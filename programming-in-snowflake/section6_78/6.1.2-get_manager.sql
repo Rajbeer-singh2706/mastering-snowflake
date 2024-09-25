@@ -39,8 +39,6 @@ call find_manager('nobody');
 
 
 -- $$ => for BLOCK or Multiple statements 
-
-
 if(res.next())
   return res.getColumnValue(1);
 else

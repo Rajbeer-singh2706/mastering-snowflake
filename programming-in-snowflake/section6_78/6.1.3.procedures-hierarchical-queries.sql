@@ -5,10 +5,11 @@ use schema employees.public;
 -- https://docs.snowflake.com/en/user-guide/queries-hierarchical
 with cte as (
   select e.employee as name,
-    coalesce(m3.employee || '.', '')
-      || coalesce(m2.employee || '.', '')
-      || coalesce(m1.employee || '.', '')
-      || e.employee as path
+    coalesce(m3.employee || '.', '') || 
+    coalesce(m2.employee || '.', '') || 
+    coalesce(m1.employee || '.', '') || 
+    e.employee as path
+  
   from employee_manager e
     left join employee_manager m1 on e.manager = m1.employee
     left join employee_manager m2 on m1.manager = m2.employee
@@ -36,7 +37,8 @@ order by path;
 
 -- (2) CONNECT BY (only for self-joins)
 -- https://docs.snowflake.com/en/sql-reference/constructs/connect-by
-select repeat('  ', level - 1) || employee as name, 
+select 
+  repeat('  ', level - 1) || employee as name, 
   ltrim(sys_connect_by_path(employee, '.'), '.') as path
 from employee_manager
 start with manager is null

@@ -19,7 +19,7 @@
               "s3:DeleteObject",
               "s3:DeleteObjectVersion"
             ],
-            "Resource": "arn:aws:s3:::my-snowflake-bucket/data/*"
+            "Resource": "arn:aws:s3:::snowflake-external-stage-data-test1/data/*"
         },
         {
             "Effect": "Allow",
@@ -27,12 +27,14 @@
                 "s3:ListBucket",
                 "s3:GetBucketLocation"
             ],
-            "Resource": "arn:aws:s3:::my-snowflake-bucket",
+            "Resource": "arn:aws:s3:::snowflake-external-stage-data-test1",
             "Condition": { "StringLike": { "s3:prefix": [ "data/*" ] } }
         }
     ]
 }
 */
+NAME : snowflake-test-policy
+
 
 -- establish context
 use schema employees.public;

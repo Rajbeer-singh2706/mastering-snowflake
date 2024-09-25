@@ -26,7 +26,7 @@ create or replace TABLE EMP (
 );
 
 -- BULK COPY : COPY COMMAND 
-
+-- From stage to EMP Table 
 COPY INTO EMP FROM @mystage
    FILES = ('emp.csv')
    FILE_FORMAT = (FORMAT_NAME = mycsvformat)
@@ -35,5 +35,4 @@ COPY INTO EMP FROM @mystage
 
 
 -- delete from emp ;
-
 select * from emp; --14 rows 
