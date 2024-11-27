@@ -1,13 +1,13 @@
 USE SCHEMA test.ts;
 
-// ===================================================
+-- ##################### Problem1 ===================================================
 -- for first store only, unlabeled/unsupervized
 CREATE OR REPLACE SNOWFLAKE.ML.ANOMALY_DETECTION ad1(
   INPUT_DATA => SYSTEM$QUERY_REFERENCE('SELECT date, sales FROM view1_train'),
   TIMESTAMP_COLNAME => 'date',
   TARGET_COLNAME => 'sales',
   LABEL_COLNAME => '');           -- '' for unlabeled/unsupervized
-  
+
 SHOW SNOWFLAKE.ML.ANOMALY_DETECTION;
 
 CALL ad1!DETECT_ANOMALIES(
@@ -15,13 +15,14 @@ CALL ad1!DETECT_ANOMALIES(
   TIMESTAMP_COLNAME => 'date',
   TARGET_COLNAME => 'sales');
 
-// ===================================================
+-- ##################### Problem2 ===================================================
 -- for second store only, unlabeled/unsupervized
 CREATE OR REPLACE SNOWFLAKE.ML.ANOMALY_DETECTION ad2(
   INPUT_DATA => SYSTEM$QUERY_REFERENCE('SELECT date, sales FROM view2_train'),
   TIMESTAMP_COLNAME => 'date',
   TARGET_COLNAME => 'sales',
   LABEL_COLNAME => '');
+
 SHOW SNOWFLAKE.ML.ANOMALY_DETECTION;
 
 CALL ad2!DETECT_ANOMALIES(
@@ -31,7 +32,7 @@ CALL ad2!DETECT_ANOMALIES(
 
 CALL ad2!EXPLAIN_FEATURE_IMPORTANCE();
 
-// ===================================================
+-- ##################### Problem3 ===================================================
 -- for first store only, labeled/supervized, w/ all additional columns
 CREATE OR REPLACE SNOWFLAKE.ML.ANOMALY_DETECTION ad1l(
   INPUT_DATA => SYSTEM$REFERENCE('VIEW', 'view1_train'),
@@ -46,7 +47,7 @@ CALL ad1l!DETECT_ANOMALIES(
 
 CALL ad1l!EXPLAIN_FEATURE_IMPORTANCE();
 
-// ===================================================
+-- ##################### Problem4 ===================================================
 -- for all data, multiple time-series
 CREATE OR REPLACE SNOWFLAKE.ML.ANOMALY_DETECTION ad(
   INPUT_DATA => SYSTEM$REFERENCE('VIEW', 'view_train'),
@@ -64,7 +65,7 @@ CALL ad!DETECT_ANOMALIES(
 
 CALL ad!EXPLAIN_FEATURE_IMPORTANCE();
   
-// ===================================================
+-- ##################### Problem5 ===================================================
 -- emulate error w/ duplicate entry, to show in logs
 CALL ad!SHOW_TRAINING_LOGS();
 
