@@ -1,5 +1,8 @@
 //Creating the table / Meta data
 
+ create DATABASE OUR_FIRST_DB;
+
+
 CREATE TABLE "OUR_FIRST_DB"."PUBLIC"."LOAN_PAYMENT" (
   "Loan_ID" STRING,
   "loan_status" STRING,
@@ -32,3 +35,10 @@ CREATE TABLE "OUR_FIRST_DB"."PUBLIC"."LOAN_PAYMENT" (
 
 //Validate
  SELECT * FROM LOAN_PAYMENT;
+
+ -- No compute invocled 
+ select count(*) from LOAN_PAYMENT;
+ select *  from LOAN_PAYMENT;
+
+ -- COmpute invoved  
+ select max("age") from LOAN_PAYMENT;
