@@ -1,1 +1,0 @@
-1. CMD+ENTR => To run the selected Query
